@@ -1,0 +1,124 @@
+import javax.swing.*;
+import java.awt.event.*;
+import java.awt.*;
+
+public class OptionPaneEx extends JFrame {
+	JButton inputBtn = new JButton("Input Name");		
+	JTextField tf = new JTextField(15);
+	JButton confirmBtn = new JButton("Confirm");		
+	JButton messageBtn = new JButton("Message");
+	
+	OptionPaneEx() {
+		setTitle("옵션 팬 예제");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container c = getContentPane();
+		setSize(500,200);
+		
+		c.add(new MyPanel(), BorderLayout.NORTH);
+		
+		/*JPanel p=new JPanel();
+		p.setBackground(Color.LIGHT_GRAY);
+		p.add(inputBtn);
+		p.add(confirmBtn);
+		p.add(messageBtn);
+		p.add(tf);
+		Mylistner listner =new  Mylistner();
+		inputBtn.addActionListener(listner);
+		confirmBtn.addActionListener(listner);
+		messageBtn.addActionListener(listner);
+		 
+		c.add(p, BorderLayout.NORTH);*/
+		
+		setVisible(true);
+	 }
+	
+	class MyPanel extends Panel {
+		
+		MyPanel() {
+			setBackground(Color.YELLOW);
+			add(inputBtn);
+			add(confirmBtn);
+			add(messageBtn);
+			add(tf);
+			Mylistner listner =new  Mylistner();
+			inputBtn.addActionListener(listner);
+			confirmBtn.addActionListener(listner);
+			messageBtn.addActionListener(listner);
+			
+			/*inputBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// 입력 다이얼로그 생성
+				String name = JOptionPane.showInputDialog("이름을 입력하세요.");
+				if(name != null)
+					tf.setText(name); // 사용자가 입력한 문자열을 텍스트필드 창에 출력
+		 	 }
+		   });
+
+		  confirmBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// 확인 다이얼로그 생성
+				int result = JOptionPane.showConfirmDialog(null, 
+						"계속할 것입니까?", "Confirm", JOptionPane.YES_NO_OPTION);
+				
+				// 사용자가 선택한 버튼에 따라 문자열을 텍스트필드 창에 출력
+				if(result == JOptionPane.CLOSED_OPTION)
+					tf.setText("Just Closed without Selection");
+				else if(result == JOptionPane.YES_OPTION)
+					tf.setText("Yes");
+				else
+					tf.setText("No");
+			 }
+		   });
+		
+		  messageBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// 메시지 다이얼로그 생성					
+				JOptionPane.showMessageDialog(null, "조심하세요", "Message", JOptionPane.ERROR_MESSAGE); 
+		    	setTitle("조심");
+		    	tf.setText("조심");
+			  }
+		   }); */
+		   
+		}
+	}
+		class Mylistner implements ActionListener {
+			public void actionPerformed(ActionEvent e) {
+			  String c=e.getActionCommand();
+				switch(c){
+					case "Input Name":
+						String name = JOptionPane.showInputDialog("이름을 입력하세요.","홍길동");
+						if(name != null)
+							tf.setText(name); // 사용자가 입력한 문자열을 텍스트필드 창에 출력
+						 setTitle("입력...");
+					    break;
+					case "Confirm":	
+					    int result = JOptionPane.showConfirmDialog(null, "계속할 것입니까?", "Confirm", JOptionPane.YES_NO_OPTION);//OK_CANCEL_OPTION);
+					
+					    // 사용자가 선택한 버튼에 따라 문자열을 텍스트필드 창에 출력
+				        if(result == JOptionPane.CLOSED_OPTION)
+					    	tf.setText("Just Closed without Selection");
+					    else if(result == JOptionPane.YES_OPTION)
+					    	tf.setText("Yes");
+					    else
+					    	tf.setText("No");
+				        setTitle("확인");
+				     	break;
+					case "Message":
+					    JOptionPane.showMessageDialog(null, "조심하세요", "Message", JOptionPane.WARNING_MESSAGE);//QUESTION_MESSAGE);//WARNING_MESSAGE);//INFORMATION_MESSAGE);//ERROR_MESSAGE); 
+			    	    setTitle("조심");
+			    	    tf.setText("조심");
+			    	    break;
+				   }
+			    }
+		      }
+		
+
+
+	public static void main(String [] args) {
+		OptionPaneEx of=new OptionPaneEx();
+	}
+} 
+
+
+
+
